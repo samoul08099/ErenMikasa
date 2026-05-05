@@ -2,127 +2,122 @@
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <title>Eren_Mikasa_Protocol.exe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S & S | Do You Love Me?</title>
     <style>
         body {
-            background: url('bg.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: #00ff41;
-            font-family: 'Courier New', monospace;
-            height: 100vh;
-            margin: 0;
+            background-color: #0d0016; 
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
-            transition: background 0.5s ease-in-out;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            color: #d8c2ff;
+            background-image: url('bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: background-image 0.5s ease-in-out; 
         }
 
-        .terminal {
-            background: rgba(0, 0, 0, 0.85);
-            border: 2px solid #ff0055; 
-            padding: 30px;
-            border-radius: 15px;
+        .container {
             text-align: center;
-            box-shadow: 0 0 25px #ff0055;
-            max-width: 500px;
-            z-index: 10;
+            background-color: rgba(26, 0, 43, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid #5a0099;
+            box-shadow: 0 0 20px #8a2be2;
+            position: relative; 
+            overflow: hidden; 
         }
 
-        .status-text {
-            font-size: 20px;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px #000;
+        h1 {
+            color: #b300b3;
+            text-shadow: 0 0 10px #ff00ff, 0 0 20px #800080;
+            margin-bottom: 30px;
         }
 
-        .btn-container {
+        .buttons {
             display: flex;
-            justify-content: center;
             gap: 20px;
-            height: 60px;
-            position: relative;
+            justify-content: center;
+            position: relative; 
         }
 
         button {
-            padding: 10px 30px;
+            padding: 15px 30px;
             font-size: 18px;
-            font-family: inherit;
+            border: none;
+            border-radius: 10px;
             cursor: pointer;
-            border: 1px solid #ff0055;
-            background: transparent;
-            color: #ff0055;
-            transition: 0.3s;
+            transition: all 0.3s ease; 
+            outline: none;
         }
 
-        button:hover {
-            background: #ff0055;
-            color: #fff;
+        .yes-btn {
+            background-color: #ff3333;
+            color: white;
+            box-shadow: 0 0 10px #ff0000;
         }
 
-        #noBtn {
-            position: absolute; 
-            transition: all 0.1s ease;
+        .yes-btn:hover {
+            background-color: #cc0000;
+            box-shadow: 0 0 20px #ff3333;
         }
 
-        .final-msg {
-            display: none;
-            font-size: 24px;
-            font-weight: bold;
-            margin-top: 20px;
+        .no-btn {
+            background-color: #4d0099;
+            color: #d8c2ff;
+            border: 2px solid #8a2be2;
+            position: relative; 
         }
+
     </style>
 </head>
 <body>
-
-    <div class="terminal" id="mainTerminal">
-        <div class="status-text">
-            [!] Connection: SECURE<br>
-            [?] Target: Eren Yeager<br>
-            [?] Decision: Stay with Mikasa?
+    <div class="container">
+        <h1>Do you love me, S?</h1>
+        <div class="buttons">
+            <button class="yes-btn" id="yesBtn">Yes</button>
+            <button class="no-btn" id="noBtn">No</button>
         </div>
-
-        <div class="btn-container">
-            <button id="yesBtn" onclick="handleYes()">YES</button>
-            <button id="noBtn" onmouseover="moveNo()" onclick="handleNo()">NO</button>
-        </div>
-
-        <div id="msg" class="final-msg"></div>
     </div>
 
     <script>
-        const body = document.body;
+        const yesBtn = document.getElementById('yesBtn');
         const noBtn = document.getElementById('noBtn');
-        const terminal = document.getElementById('mainTerminal');
-        const msg = document.getElementById('msg');
+        const body = document.body;
+        const container = document.querySelector('.container');
 
-        function moveNo() {
-            const x = Math.random() * (window.innerWidth - 150);
-            const y = Math.random() * (window.innerHeight - 50);
-            noBtn.style.left = x + 'px';
-            noBtn.style.top = y + 'px';
+        let yesScale = 1;
+
+        noBtn.addEventListener('mouseover', moveButton); 
+        noBtn.addEventListener('click', moveButton); 
+
+        function moveButton() {
+            const containerWidth = container.offsetWidth;
+            const containerHeight = container.offsetHeight;
+            const btnWidth = noBtn.offsetWidth;
+            const btnHeight = noBtn.offsetHeight;
+
+            const newLeft = Math.random() * (containerWidth - btnWidth);
+            const newTop = Math.random() * (containerHeight - btnHeight);
+
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = `${newLeft}px`;
+            noBtn.style.top = `${newTop}px`;
+
+            body.style.backgroundImage = "url('no.jpg')"; 
         }
 
-        function handleYes() {
-            body.style.background = "url('yes.jpg') no-repeat center center fixed";
-            body.style.backgroundSize = "cover";
-            terminal.style.borderColor = "#00ff41";
-            terminal.style.boxShadow = "0 0 25px #00ff41";
-            msg.innerHTML = "🕊️ ACCESS GRANTED: Eternal Peace Found.";
-            msg.style.color = "#00ff41";
-            msg.style.display = "block";
-            document.querySelector('.btn-container').style.display = "none";
-        }
+        yesBtn.addEventListener('click', () => {
+            yesScale += 0.5; // 
+            yesBtn.style.transform = `scale(${yesScale})`; 
 
-        function handleNo() {
-            body.style.background = "url('no.jpg') no-repeat center center fixed";
-            body.style.backgroundSize = "cover";
-            terminal.style.borderColor = "#ff0000";
-            terminal.style.boxShadow = "0 0 25px #ff0000";
-            msg.innerHTML = "⚠️ SYSTEM ERROR: The Cycle Continues.";
-            msg.style.color = "#ff0000";
-            msg.style.display = "block";
-            document.querySelector('.btn-container').style.display = "none";
-        }
+            // body.style.backgroundImage = "url('yes.jpg')";
+        });
+
     </script>
 </body>
 </html>
