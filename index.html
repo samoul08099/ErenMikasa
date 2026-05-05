@@ -85,15 +85,16 @@
     </div>
 
     <script>
-        const yesBtn = document.getElementById('yesBtn');
+                const yesBtn = document.getElementById('yesBtn');
         const noBtn = document.getElementById('noBtn');
         const body = document.body;
         const container = document.querySelector('.container');
+        const h1 = document.querySelector('h1'); 
 
         let yesScale = 1;
 
-        noBtn.addEventListener('mouseover', moveButton); 
-        noBtn.addEventListener('click', moveButton); 
+        noBtn.addEventListener('mouseover', moveButton);
+        noBtn.addEventListener('click', moveButton);
 
         function moveButton() {
             const containerWidth = container.offsetWidth;
@@ -112,12 +113,15 @@
         }
 
         yesBtn.addEventListener('click', () => {
-            yesScale += 0.5; // 
+            yesScale += 0.5; 
             yesBtn.style.transform = `scale(${yesScale})`; 
 
-            // body.style.backgroundImage = "url('yes.jpg')";
+            body.style.backgroundImage = "url('yes.jpg')"; 
+            
+            h1.innerHTML = "I Love You Too! ❤️";
+            
+            noBtn.style.display = 'none';
         });
-
     </script>
 </body>
 </html>
