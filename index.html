@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>Eren_Mikasa_Protocol.exe</title>
+    <style>
+        body {
+            background: url('bg.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #00ff41;
+            font-family: 'Courier New', monospace;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            transition: background 0.5s ease-in-out;
+        }
+
+        .terminal {
+            background: rgba(0, 0, 0, 0.85);
+            border: 2px solid #ff0055; 
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 0 25px #ff0055;
+            max-width: 500px;
+            z-index: 10;
+        }
+
+        .status-text {
+            font-size: 20px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px #000;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            height: 60px;
+            position: relative;
+        }
+
+        button {
+            padding: 10px 30px;
+            font-size: 18px;
+            font-family: inherit;
+            cursor: pointer;
+            border: 1px solid #ff0055;
+            background: transparent;
+            color: #ff0055;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #ff0055;
+            color: #fff;
+        }
+
+        #noBtn {
+            position: absolute; 
+            transition: all 0.1s ease;
+        }
+
+        .final-msg {
+            display: none;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="terminal" id="mainTerminal">
+        <div class="status-text">
+            [!] Connection: SECURE<br>
+            [?] Target: Eren Yeager<br>
+            [?] Decision: Stay with Mikasa?
+        </div>
+
+        <div class="btn-container">
+            <button id="yesBtn" onclick="handleYes()">YES</button>
+            <button id="noBtn" onmouseover="moveNo()" onclick="handleNo()">NO</button>
+        </div>
+
+        <div id="msg" class="final-msg"></div>
+    </div>
+
+    <script>
+        const body = document.body;
+        const noBtn = document.getElementById('noBtn');
+        const terminal = document.getElementById('mainTerminal');
+        const msg = document.getElementById('msg');
+
+        function moveNo() {
+            const x = Math.random() * (window.innerWidth - 150);
+            const y = Math.random() * (window.innerHeight - 50);
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        }
+
+        function handleYes() {
+            body.style.background = "url('yes.jpg') no-repeat center center fixed";
+            body.style.backgroundSize = "cover";
+            terminal.style.borderColor = "#00ff41";
+            terminal.style.boxShadow = "0 0 25px #00ff41";
+            msg.innerHTML = "🕊️ ACCESS GRANTED: Eternal Peace Found.";
+            msg.style.color = "#00ff41";
+            msg.style.display = "block";
+            document.querySelector('.btn-container').style.display = "none";
+        }
+
+        function handleNo() {
+            body.style.background = "url('no.jpg') no-repeat center center fixed";
+            body.style.backgroundSize = "cover";
+            terminal.style.borderColor = "#ff0000";
+            terminal.style.boxShadow = "0 0 25px #ff0000";
+            msg.innerHTML = "⚠️ SYSTEM ERROR: The Cycle Continues.";
+            msg.style.color = "#ff0000";
+            msg.style.display = "block";
+            document.querySelector('.btn-container').style.display = "none";
+        }
+    </script>
+</body>
+</html>
